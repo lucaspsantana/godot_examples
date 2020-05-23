@@ -20,7 +20,6 @@ func jump(): #função de salto
 
 func _on_Jumper_area_entered(area): #detecta um circulo com sinal de area entered
 	target = area  #conecta-se
-	target.get_node("Pivot").rotation = (position - target.position).angle() #começar a rodar no local atingido
 	velocity = Vector2.ZERO #parmaos de avançar
 	emit_signal("captured",area) #sinal será emitido quando o 
 #jumper atingir o ciculo 
@@ -33,3 +32,12 @@ func _physics_process(delta):
 		transform = target.orbit_position.global_transform
 	else: #senão, avançamos em linha reta 
 		position += velocity * delta
+		
+func die():
+	target = null
+	queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	if !target:
+		die()

@@ -28,7 +28,7 @@ func spawn_circle(_position=null):
 
 func _on_Jumper_captured(object): #captura o sinal captured dos Jumper's
 	$Camera2D.position = object.position #mover a camera pelo circulo
-	object.capture()
+	object.capture(player)
 	call_deferred("spawn_circle") #gera outro circulo
 	#executa esta a função assim que for seguro executar
 
